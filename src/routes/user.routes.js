@@ -3,7 +3,10 @@ const router = express.Router();
 const {body, validationResult, param} = require('express-validator');
 const userController = require('../controllers/user.controller');
 
+// Get all users
 router.get('/', userController.getAllUsers);
+
+// Create a new user
 router.post(
     '/',
     body('name').notEmpty().withMessage('Name is required'),
@@ -17,10 +20,11 @@ router.post(
     },
     userController.createUser
 );
+
+// Delete user by ID
 router.delete(
     '/:userId',
     param('userId')
-        .notEmpty().withMessage('User ID is required')
         .isInt().withMessage('User ID must be an integer'),
     (req, res, next) => {
         const errors = validationResult(req);
@@ -31,11 +35,16 @@ router.delete(
     },
     userController.deleteUser
 );
+router.delete('/', (req, res) => {
+    res.status(400).json({
+        error: 'User ID is required in the path, e.g., /users/1'
+    });
+});
 
+// Update user by ID
 router.put(
     '/:userId',
     param('userId')
-        .notEmpty().withMessage('User ID is required')
         .isInt().withMessage('User ID must be an integer'),
     (req, res, next) => {
         const errors = validationResult(req);
@@ -46,5 +55,10 @@ router.put(
     },
     userController.updateUser
 );
+router.put('/', (req, res) => {
+    res.status(400).json({
+        error: 'User ID is required in the path, e.g., /users/1'
+    });
+});
 
 module.exports = router;

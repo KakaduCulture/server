@@ -1,6 +1,7 @@
 const { DataSource } = require("typeorm");
 require("dotenv").config();
 
+// DO NOT MODIFY THIS FILE; IT IS VITAL TO CONNECT TO THE DATABASE.
 const AppDataSource = new DataSource({
     type: "postgres",
     host: process.env.DB_HOST,

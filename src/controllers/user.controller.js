@@ -1,6 +1,7 @@
 const {AppDataSource} = require("../data-source");
 const userRepo = AppDataSource.getRepository("User");
 
+// Get all users
 const getAllUsers = async (req, res) => {
     try {
         const users = await userRepo.find();
@@ -10,6 +11,7 @@ const getAllUsers = async (req, res) => {
     }
 };
 
+// Create a new user
 const createUser = async (req, res) => {
     try {
         const {name, email} = req.body;
@@ -23,6 +25,7 @@ const createUser = async (req, res) => {
     }
 };
 
+// Delete user by ID
 const deleteUser = async (req, res) => {
     try {
         const {userId} = req.params;
@@ -39,6 +42,7 @@ const deleteUser = async (req, res) => {
     }
 }
 
+// Update user by ID
 const updateUser = async (req, res) => {
     try {
         const {userId} = req.params;
@@ -58,7 +62,6 @@ const updateUser = async (req, res) => {
         res.status(500).json({message: "Error updating user", error: error.message});
     }
 };
-
 
 module.exports = {
     getAllUsers, createUser, deleteUser, updateUser
