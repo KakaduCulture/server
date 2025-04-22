@@ -15,7 +15,6 @@ module.exports = new EntitySchema({
         email: {
             type: "varchar",
             unique: true,
-            nullable: true,
         },
     },
 });
