@@ -90,3 +90,29 @@ You can test the server by sending a GET request to the `/api` endpoint using Po
 ```bash
 http://localhost:10000/api/users
 ```
+
+## 🐘 View Database Using DBeaver
+
+1. Visit the official DBeaver website:  
+   https://dbeaver.io/download/
+
+2. Download and install **DBeaver Community Edition** (it's free).
+
+3. Open DBeaver, click the **Add Database Connection** button (first icon in the left toolbar).
+
+4. Choose **PostgreSQL** from the list.
+
+5. In the main connection setup page:
+   - Change **Database** from `postgres` to `mydatabase`
+   - Set **Username** to `daniel`
+   - Set **Password** to `daniel123` (or whatever you set in Step 2)
+
+6. Click **Finish**
+
+7. In the left sidebar, expand the following path to view your tables and data:
+
+   ```
+   Databases > mydatabase > Schemas > public > Tables
+   ```
+
+You will now be connected to your local PostgreSQL database and can view, browse, and edit your tables and data.
