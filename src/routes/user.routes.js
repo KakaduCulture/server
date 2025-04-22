@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const {body, validationResult, param} = require('express-validator');
 const userController = require('../controllers/user.controller');
+const { verifyToken } = require('../middlewares/auth');
 
 // Get all users
 router.get('/', userController.getAllUsers);
@@ -24,6 +25,7 @@ router.post(
 // Delete user by ID
 router.delete(
     '/:userId',
+    verifyToken, // Middleware to verify JWT token
     param('userId')
         .isInt().withMessage('User ID must be an integer'),
     (req, res, next) => {

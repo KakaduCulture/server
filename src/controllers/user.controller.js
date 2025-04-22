@@ -1,5 +1,6 @@
 const {AppDataSource} = require("../data-source");
 const userRepo = AppDataSource.getRepository("User");
+const { generateToken } = require('../middlewares/auth');
 
 // Get all users
 const getAllUsers = async (req, res) => {

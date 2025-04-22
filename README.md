@@ -54,6 +54,8 @@ This guide helps you run a full Express.js + PostgreSQL backend on your local ma
 
    ```env
    PORT=10000
+   NODE_ENV=development
+   JWT_SECRET=Kakadu$N@t10n@lP@rk_9xV7!zL#fQ82Tp@!m3Wq
    DB_HOST=localhost
    DB_PORT=5432
    DB_USERNAME=daniel
