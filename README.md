@@ -23,8 +23,19 @@ This guide helps you run a full Express.js + PostgreSQL backend on your local ma
    docker run --name my-postgres -e POSTGRES_PASSWORD=daniel123 -e POSTGRES_USER=daniel -e POSTGRES_DB=mydatabase -p 5432:5432 -v postgres-data:/var/lib/postgresql/data -d postgres:latest
    ```
    
-   > You can change `POSTGRES_USER`, `POSTGRES_PASSWORD`, and `POSTGRES_DB` to your own values if needed.
+   > You should change `POSTGRES_USER`, `POSTGRES_PASSWORD`, and `POSTGRES_DB` to your own values.
+
+3. **Create a project folder named codeupnt**
+   ```bash
+    #Mac/Linux
+    mkdir codeupnt
+    cd codeupnt
    
+    #Windows
+    mkdir %USERPROFILE%\Desktop\codeupnt
+    cd %USERPROFILE%\Desktop\codeupnt
+    ```
+
 3. **Clone the backend server project to your local machine**
 
    ```bash
@@ -49,6 +60,7 @@ This guide helps you run a full Express.js + PostgreSQL backend on your local ma
    DB_PASSWORD=daniel123
    DB_NAME=mydatabase
    ```
+   > The `POSTGRES_USER`, `POSTGRES_PASSWORD`, and `POSTGRES_DB` values are the username, password, and database name you just created in the step 2.
 
 6. **Start the development server**
 
