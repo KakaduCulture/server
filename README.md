@@ -30,6 +30,7 @@ This guide helps you run a full Express.js + PostgreSQL backend on your local ma
    ```bash
    git clone https://github.com/KakaduCulture/server.git
    cd server
+   git pull
    ```
 
 4. **Install dependencies**
