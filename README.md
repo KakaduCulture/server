@@ -69,3 +69,11 @@ This guide helps you run a full Express.js + PostgreSQL backend on your local ma
 ## ✅ Done!
 
 Your backend server is now running locally and connected to a PostgreSQL database inside Docker. You can start building APIs and testing endpoints.
+
+
+## Test
+You can test the server by sending a GET request to the `/api` endpoint using Postman or your browser:
+
+```bash
+http://localhost:10000/api/users
+```
