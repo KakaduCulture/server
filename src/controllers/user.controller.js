@@ -30,7 +30,6 @@ const deleteUser = async (req, res) => {
     try {
         const {userId} = req.params;
         const user = await userRepo.findOneBy({id: parseInt(userId)});
-        console.log(user);
         if (!user) {
             return res.status(404).json({message: "User not found"});
         } else {
@@ -47,7 +46,6 @@ const updateUser = async (req, res) => {
     try {
         const {userId} = req.params;
         const {name, email} = req.body;
-
         const user = await userRepo.findOneBy({id: parseInt(userId)});
         if (!user) {
             return res.status(404).json({message: "User not found"});
