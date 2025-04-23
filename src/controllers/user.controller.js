@@ -6,8 +6,8 @@ const bcrypt = require('bcrypt');
 const getAllUsers = async (req, res) => {
     try {
         const users = await userRepo.find();
-        const safeUsers = users.map(({ password, ...rest }) => rest);
-        res.json(safeUsers);
+        const safeUsers = users.map(({password, ...rest}) => rest);
+        res.status(200).json(safeUsers);
     } catch (err) {
         res.status(500).json({error: err.message});
     }
@@ -48,16 +48,20 @@ const deleteUser = async (req, res) => {
 const updateUser = async (req, res) => {
     try {
         const {userId} = req.params;
-        const {name, email} = req.body;
+        const {name, username, password} = req.body;
         const user = await userRepo.findOneBy({id: parseInt(userId)});
         if (!user) {
             return res.status(404).json({message: "User not found"});
         } else {
             if (name !== undefined) user.name = name;
-            if (email !== undefined) user.email = email;
-
+            if (username !== undefined) user.username = username;
+            if (password !== undefined) {
+                const hashedPassword = await bcrypt.hash(password, 10);
+                user.password = hashedPassword;
+            }
             const updatedUser = await userRepo.save(user);
-            res.status(200).json(updatedUser);
+            const {password: _removed, ...safeUser} = updatedUser;
+            res.status(200).json(safeUser);
         }
     } catch (error) {
         res.status(500).json({message: "Error updating user", error: error.message});
