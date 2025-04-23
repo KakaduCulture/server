@@ -6,7 +6,8 @@ const bcrypt = require('bcrypt');
 const getAllUsers = async (req, res) => {
     try {
         const users = await userRepo.find();
-        res.json(users);
+        const safeUsers = users.map(({ password, ...rest }) => rest);
+        res.json(safeUsers);
     } catch (err) {
         res.status(500).json({error: err.message});
     }
