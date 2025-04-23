@@ -9,12 +9,15 @@ module.exports = new EntitySchema({
             type: "int",
             generated: true,
         },
-        name: {
-            type: "varchar",
-        },
-        email: {
+        username: {
             type: "varchar",
             unique: true,
         },
+        password: {
+            type: "varchar",
+        },
+        name: {
+            type: "varchar",
+        }
     },
 });

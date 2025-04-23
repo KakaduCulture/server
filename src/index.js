@@ -6,21 +6,31 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const hpp = require('hpp');
 
 // ==================== Database Initialization ====================
 const { AppDataSource } = require("./data-source");
 
 // ==================== Custom Middlewares =========================
-const logger = require('./middlewares/logger');
+const { httpLogger } = require('./middlewares/logger');
 
 // ==================== Routes =====================================
 const routes = require('./routes');
 
 // ==================== Global Middleware Setup ====================
 app.use(cors());
+app.use(helmet());
+app.use(hpp({}));
+app.use(rateLimit({                    // Rate Limiting
+    windowMs: 15 * 60 * 1000,
+    max: 100,
+    message: 'Too many requests from this IP, please try again later.'
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(logger);
+app.use(httpLogger);
 
 // ==================== Start App after DB Connection ====================
 console.log("Initializing database connection...");

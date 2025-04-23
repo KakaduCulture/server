@@ -1,6 +1,6 @@
 const {AppDataSource} = require("../data-source");
 const userRepo = AppDataSource.getRepository("User");
-const { generateToken } = require('../middlewares/auth');
+const bcrypt = require('bcrypt');
 
 // Get all users
 const getAllUsers = async (req, res) => {
@@ -15,11 +15,12 @@ const getAllUsers = async (req, res) => {
 // Create a new user
 const createUser = async (req, res) => {
     try {
-        const {name, email} = req.body;
+        const {name, username, password} = req.body;
         if (name) {
-            const newUser = userRepo.create({name, email});
+            const hashedPassword = await bcrypt.hash(password, 10);
+            const newUser = userRepo.create({name, username, password: hashedPassword});
             await userRepo.save(newUser);
-            res.status(201).json(newUser);
+            res.status(201).json({message: "User created successfully", username: newUser.username});
         }
     } catch (error) {
         res.status(500).json({message: "Error creating user", error: error.message});
