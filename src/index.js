@@ -18,6 +18,7 @@ const { httpLogger } = require('./middlewares/logger');
 
 // ==================== Routes =====================================
 const routes = require('./routes');
+ // why this file know ./routes to connect with index.js
 
 // ==================== Global Middleware Setup ====================
 app.use(cors());
