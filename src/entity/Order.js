@@ -17,7 +17,7 @@ module.exports = new EntitySchema({
             nullable: true, 
         },
         mobileNumber: {
-            type: "int",
+            type: "varchar",
             nullable: true, 
         },
         email: {

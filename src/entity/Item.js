@@ -15,6 +15,9 @@ module.exports = new EntitySchema({
         price: {
             type: "float"
         },
+        quantity: {
+            type: "int",
+        },
         orderId: {
             type: "int",
         },

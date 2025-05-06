@@ -27,10 +27,10 @@ router.post(
 );
 
 // Delete product by ID
-router.delete(
-    '/:productId',
-    verifyToken,
-    param('productId').isInt().withMessage('Product ID must be an integer'),
+router.delete('/',
+    // '/:productId',
+    // verifyToken,
+    // param('productId').isInt().withMessage('Product ID must be an integer'),
     (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {

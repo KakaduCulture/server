@@ -5,23 +5,46 @@ const orderController = require('../controllers/order.controller');
 const { verifyToken } = require('../middlewares/auth');
 
 
-// Get all users
+//Get order waiting to pay by user ID
 router.get('/checkout/:userId',
     // verifyToken,
     orderController.getUnpaidOrder);
 
-
-// Get all users
+//Get all paid order by user ID
 router.get('/paid/:userId',
     // verifyToken,
     orderController.getPaidOrder);
-// module.exports = router;
-
 
 // Create new unpaid order
 router.post('/checkout/:userId',
     // verifyToken,
-    orderController.createOrder);
+    orderController.createUnpaidOrder);
+
+router.delete('/checkout/:userId',
+        // verifyToken,
+        orderController.deleteUnpaidOrder);
+
+router.put('/checkout/:userId',
+    // verifyToken,
+
+    orderController.modifyOrderInformation);
+
+// Add more product
+router.post('/checkout/:userId/product/:productId',
+        // verifyToken,
+        
+     orderController.addProduct);
+
+// Remove product
+router.delete('/checkout/:userId/product/:productId',
+    // verifyToken,  
+ orderController.removeProduct);
+
+router.put('/payment/:userId',
+        // verifyToken,
+        
+     orderController.payment);
+
 module.exports = router;
 
 
