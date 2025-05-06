@@ -32,7 +32,6 @@ router.put('/checkout/:userId',
 // Add more product
 router.post('/checkout/:userId/product/:productId',
         // verifyToken,
-        
      orderController.addProduct);
 
 // Remove product
@@ -42,7 +41,6 @@ router.delete('/checkout/:userId/product/:productId',
 
 router.put('/payment/:userId',
         // verifyToken,
-        
      orderController.payment);
 
 module.exports = router;

@@ -5,35 +5,38 @@ const productRepo = AppDataSource.getRepository("Product");
 
 
 
-//Display the unpaid order (done)
+
+//Handle logic to get all orders by payment status
+const getOrderByPayment = async (req, res, paymentStatus) => {
+    const { userId } = req.params;
+    const Orders = await orderRepo.find({ where: { userId: parseInt(userId), payment: paymentStatus } });
+    const orderInfo = [];
+    if (!Orders) {
+        return res.status(404).json({ message: "Order is not found" });
+    }
+    for(const order of Orders){
+        const item = await itemRepo.find({ where: { orderId: order.id } });
+        orderInfo.push({
+            order: order,
+            items: item 
+        })     
+    }
+    res.status(200).json({orderInfo});
+
+}
+
+//Display the unpaid order 
 const getUnpaidOrder = async (req, res) => {
-    const { userId } = req.params;
-    const currentOrder = await orderRepo.findOne({ where: { userId: parseInt(userId), payment: 0 } });
-    if (!currentOrder) {
-        return res.status(404).json({ message: "Your Shopping Bag is empty." });
-    }
-    const items = await itemRepo.find({ where: { orderId: currentOrder.id } });
-    res.status(200).json({
-        order: currentOrder,
-        items: items
-    });
+    return getOrderByPayment(req, res, 0);
 }
 
-//Display all paid order to manage (xem lại đã lấy được hết paid order của 1 customer chưa/ maybe need a loop)
+//Display all paid order to manage
 const getPaidOrder = async (req, res) => {
-    const { userId } = req.params;
-    const paidOrders = await orderRepo.findOne({ where: { userId: parseInt(userId), payment: 1 } });
-    if (!paidOrders) {
-        return res.status(404).json({ message: "You didn't order before" });
-    }
-    const items = await itemRepo.find({ where: { orderId: paidOrders.id } });
-    res.status(200).json({
-        order: paidOrders,
-        items: items
-    });
+    return getOrderByPayment(req, res, 1);
 }
 
-//Create a new order ((haven't check stock and get price of the product yet))
+
+//Create a new unpaid order 
 const createUnpaidOrder = async (req, res) => {
     try {
         const { userId } = req.params;
@@ -60,12 +63,13 @@ const createUnpaidOrder = async (req, res) => {
                 res.status(500).json({ message: "Try latter", newOrder });
             }
         }
-        res.status(500).json({ message: "You hava an unpaid order." });
+        res.status(500).json({ message: "You have an unpaid order." });
     }
     catch (error) {
         res.status(500).json({ message: "Error creating order", error: error.message });
     }
 }
+
 
 // Cancel unpaid order
 const deleteUnpaidOrder = async (req, res) => {
@@ -177,7 +181,14 @@ const payment = async (req, res) => {
 
 
 module.exports = {
-    getUnpaidOrder, getPaidOrder, createUnpaidOrder,deleteUnpaidOrder, modifyOrderInformation, addProduct,removeProduct, payment
+    getUnpaidOrder, 
+    getPaidOrder, 
+    createUnpaidOrder,
+    deleteUnpaidOrder, 
+    modifyOrderInformation, 
+    addProduct,
+    removeProduct, 
+    payment
 
 };
 
