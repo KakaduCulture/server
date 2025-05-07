@@ -48,8 +48,9 @@ const deleteProducts = async (req, res) => {
 const updateProducts = async (req, res) => {
     try {
 
-        const {productId} = req.params;
-        const {name, price, stock, unit, imageUrl, description} = req.body;
+        // const {productId} = req.params;
+
+        const {productId,name, price, stock, unit, imageUrl, description} = req.body;
         const product = await productRepo.findOneBy({id: parseInt(productId)});
         if (!product) {
             return res.status(404).json({message: "Product not found"});

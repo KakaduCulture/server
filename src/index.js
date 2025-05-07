@@ -18,7 +18,7 @@ const { httpLogger } = require('./middlewares/logger');
 
 // ==================== Routes =====================================
 const routes = require('./routes');
-
+ 
 // ==================== Global Middleware Setup ====================
 app.use(cors());
 app.use(helmet());
