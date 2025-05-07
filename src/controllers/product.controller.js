@@ -31,8 +31,7 @@ const createProducts = async (req, res) => {
 // Delete products by ID
 const deleteProducts = async (req, res) => {
     try {
-        // const {productId} = req.params;
-        const {productId} = req.body;
+        const {productId} = req.params;
         const product = await productRepo.findOneBy({id: parseInt(productId)});
         if (!product) {
             return res.status(404).json({message: "Product not found"});
@@ -45,7 +44,7 @@ const deleteProducts = async (req, res) => {
     }
 }
 
-// Update user by ID
+// Update Product by ID
 const updateProducts = async (req, res) => {
     try {
 
@@ -63,7 +62,7 @@ const updateProducts = async (req, res) => {
             if (imageUrl !==undefined) product.imageUrl = imageUrl;
             if (description !== undefined) product.description = description;
 
-            const updatedUser = await productRepo.save(product);
+            const updatedProduct = await productRepo.save(product);
             res.status(200).json(updatedProduct);
         }
     } catch (error) {
