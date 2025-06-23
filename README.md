@@ -136,11 +136,11 @@ brew install autossh
 ```
 
 #### 3. Place SSH Key
-Make sure you saved the `codeupnt` private key file in desktop.
 
 Move your `codeupnt` private key to:
 
 ```bash
+# Make sure you saved the `codeupnt` private key file in desktop.
 mkdir -p ~/.ssh
 mv ~/Desktop/codeupnt ~/.ssh/codeupnt
 chmod 600 ~/.ssh/codeupnt
@@ -184,6 +184,7 @@ sudo apt install autossh
 - Move your private key file into WSL (e.g., `/home/yourname/.ssh/codeupnt`) and set permissions:
 
 ```bash
+# Make sure you saved the `codeupnt` private key file in desktop.
 mkdir -p ~/.ssh
 mv /mnt/c/Users/<YourWindowsUsername>/Desktop/codeupnt ~/.ssh/codeupnt
 chmod 600 ~/.ssh/codeupnt
