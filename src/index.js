@@ -44,7 +44,7 @@ AppDataSource.initialize()
 
         // Start the server
         app.listen(PORT, () => {
-            console.log(`Server is running at http://localhost:${PORT} in ${process.env.NODE_ENV} mode`);
+            console.log(`Server is running at http://0.0.0.0:${PORT} in ${process.env.NODE_ENV} mode`);
         });
     })
     .catch((error) => {

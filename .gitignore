@@ -7,3 +7,4 @@ build/
 npm-debug.log
 /logs/combined.log
 /logs/error.log
+/.idea/inspectionProfiles/Project_Default.xml
