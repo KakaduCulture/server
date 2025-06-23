@@ -118,3 +118,90 @@ http://localhost:10000/api/users
    ```
 
 You will now be connected to your local PostgreSQL database and can view, browse, and edit your tables and data.
+
+## 🌍 Connect to Remote PostgreSQL via SSH Tunnel
+
+### For macOS
+
+#### 1. Download Homebrew
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+#### 2. Install autossh
+
+```bash
+brew install autossh
+```
+
+#### 3. Place SSH Key
+Make sure you saved the `codeupnt` private key file in desktop.
+
+Move your `codeupnt` private key to:
+
+```bash
+mkdir -p ~/.ssh
+mv ~/Desktop/codeupnt ~/.ssh/codeupnt
+chmod 600 ~/.ssh/codeupnt
+```
+
+#### 4. Run autossh tunnel
+
+```bash
+autossh -M 0 -f -N \
+  -o "ServerAliveInterval 60" \
+  -o "ServerAliveCountMax 3" \
+  -i ~/.ssh/codeupnt \
+  -L 5432:localhost:5432 \
+  ubuntu@52.62.125.125
+```
+
+#### 5. Use the Following DB Config
+
+- Host: `localhost`
+- Port: `5432`
+- Username: `daniel`
+- Password: `daniel123`
+
+---
+
+### For Windows (WSL)
+
+#### 1. Install WSL
+
+Follow: https://learn.microsoft.com/en-au/windows/wsl/install
+
+#### 2. Inside WSL Terminal:
+
+- Install autossh:
+
+```bash
+sudo apt update
+sudo apt install autossh
+```
+
+- Move your private key file into WSL (e.g., `/home/yourname/.ssh/codeupnt`) and set permissions:
+
+```bash
+mkdir -p ~/.ssh
+mv /mnt/c/Users/<YourWindowsUsername>/Desktop/codeupnt ~/.ssh/codeupnt
+chmod 600 ~/.ssh/codeupnt
+```
+
+- Run tunnel:
+
+```bash
+autossh -M 0 -f -N \
+  -o "ServerAliveInterval 60" \
+  -o "ServerAliveCountMax 3" \
+  -i ~/.ssh/codeupnt \
+  -L 5432:localhost:5432 \
+  ubuntu@52.62.125.125
+```
+
+Now use the same database config as macOS section.
+
+---
+
+✅ You're now connected to your remote PostgreSQL DB securely via SSH tunnel.
