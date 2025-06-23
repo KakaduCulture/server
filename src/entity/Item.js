@@ -9,6 +9,9 @@ module.exports = new EntitySchema({
             type: "int",
             generated: true,
         },
+        name: {
+            type: "varchar",
+        },
         productId: {
             type: "int",
         },
@@ -21,6 +24,5 @@ module.exports = new EntitySchema({
         orderId: {
             type: "int",
         },
-
     },
 });

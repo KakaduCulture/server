@@ -13,12 +13,13 @@ router.get('/:id', productController.getProductById);
 // Create a new product
 router.post(
     '/',
-    body('name').notEmpty().withMessage('Name is required'),
-    body('price').isNumeric().withMessage('Price must be a number'),
-    body('stock').notEmpty().withMessage('Stock is required'),
-    body('unit').notEmpty().withMessage('Unit is required'),
-    body('imageUrl').notEmpty().withMessage('Image URL is required'),
-    body('description').notEmpty().withMessage('Description is required'),
+    body().isArray({ min: 1 }).withMessage('Request body must be a non-empty array'),
+    body('*.name').notEmpty().withMessage('Name is required'),
+    body('*.price').isNumeric().withMessage('Price must be a number'),
+    body('*.stock').notEmpty().withMessage('Stock is required'),
+    body('*.unit').notEmpty().withMessage('Unit is required'),
+    body('*.imageUrl').notEmpty().withMessage('Image URL is required'),
+    body('*.description').notEmpty().withMessage('Description is required'),
     (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {

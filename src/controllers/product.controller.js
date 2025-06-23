@@ -34,14 +34,15 @@ const getProductById = async (req, res) => {
 // Create a new product
 const createProducts = async (req, res) => {
     try {
-        const {name, price, stock, unit, imageUrl, description} = req.body;
-        if (name) {
-            const newProduct = productRepo.create({name, price, stock, unit, imageUrl, description});
-            await productRepo.save(newProduct);
-            res.status(201).json({message: "Product created successfully", product: newProduct.product});
+        const products = req.body;
+        if (!Array.isArray(products) || products.length === 0) {
+            return res.status(400).json({ message: "Invalid input, expected array of products" });
         }
+        const newProducts = productRepo.create(products);
+        const savedProducts = await productRepo.save(newProducts);
+        res.status(201).json({ message: "Products created successfully", products: savedProducts });
     } catch (error) {
-        res.status(500).json({message: "Error creating product", error: error.message});
+        res.status(500).json({ message: "Error creating products", error: error.message });
     }
 };
 

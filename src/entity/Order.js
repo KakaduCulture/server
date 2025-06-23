@@ -1,4 +1,4 @@
-const { EntitySchema } = require("typeorm");
+const {EntitySchema} = require("typeorm");
 
 module.exports = new EntitySchema({
     name: "Order",
@@ -14,20 +14,20 @@ module.exports = new EntitySchema({
         },
         address: {
             type: "varchar",
-            nullable: true, 
+            nullable: true,
         },
         mobileNumber: {
             type: "varchar",
-            nullable: true, 
+            nullable: true,
         },
         email: {
             type: "varchar",
-            nullable: true, 
+            nullable: true,
         },
         payment: {
-            type: "int",
+            type: "boolean",
+            default: false,      
+            nullable: true,      
         }
-        
-
     },
 });

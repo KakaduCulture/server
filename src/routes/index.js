@@ -9,8 +9,8 @@ const cartRoutes = require('./cart.routes');
 
 router.use('/users', userRoutes);
 router.use('/auth', authRoutes);
-router.use('/product',productRoutes)
+router.use('/products',productRoutes)
 router.use('/cart',cartRoutes)
-router.use('/order',orderRoutes)
+router.use('/orders',orderRoutes)
 module.exports = router;
 
