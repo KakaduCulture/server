@@ -11,6 +11,7 @@ module.exports = new EntitySchema({
         },
         name: {
             type: "varchar",
+            nullable: true,
         },
         productId: {
             type: "int",
