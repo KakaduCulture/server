@@ -14,6 +14,23 @@ const getAllProducts = async (req, res) => {
     }
 };
 
+
+// Get product by id
+const getProductById = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const product = await productRepo.findOne({ where: { id } });
+
+        if (!product) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
+
+        res.status(200).json(product);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+
 // Create a new product
 const createProducts = async (req, res) => {
     try {
@@ -71,6 +88,6 @@ const updateProducts = async (req, res) => {
 };
 
 module.exports = {
-    getAllProducts, createProducts, deleteProducts, updateProducts
+    getAllProducts, createProducts, deleteProducts, updateProducts, getProductById
 };
 

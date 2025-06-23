@@ -3,9 +3,6 @@ const orderRepo = AppDataSource.getRepository("Order");
 const itemRepo = AppDataSource.getRepository("Item");
 const productRepo = AppDataSource.getRepository("Product");
 
-
-
-
 //Handle logic to get all orders by payment status
 const getOrderByPayment = async (req, res, paymentStatus) => {
     const { userId } = req.params;

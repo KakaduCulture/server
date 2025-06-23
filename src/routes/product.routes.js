@@ -7,6 +7,9 @@ const { verifyToken } = require('../middlewares/auth');
 // Get all products
 router.get('/', productController.getAllProducts);
 
+// Get product by id
+router.get('/:id', productController.getProductById);
+
 // Create a new product
 router.post(
     '/',

@@ -41,6 +41,7 @@ AppDataSource.initialize()
         // Register all API routes
         app.use('/api', routes);
 
+
         // Start the server
         app.listen(PORT, () => {
             console.log(`Server is running at http://localhost:${PORT} in ${process.env.NODE_ENV} mode`);
