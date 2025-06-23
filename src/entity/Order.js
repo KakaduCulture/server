@@ -25,8 +25,8 @@ module.exports = new EntitySchema({
             nullable: true,
         },
         payment: {
-            type: "boolean",
-            default: false,      
+            type: "int",
+            // default: false,      
             nullable: true,      
         }
     },
