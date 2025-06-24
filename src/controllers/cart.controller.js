@@ -48,6 +48,19 @@ const deleteCarts = async (req, res) => {
     }
 }
 
+
+// Delete all cart items by user ID
+const deleteCartByUserId = async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const deleted = await cartRepo.delete({ user_id: parseInt(userId) });
+
+        res.status(200).json({ message: "All cart items deleted for user", deleted });
+    } catch (error) {
+        res.status(500).json({ message: "Error deleting cart", error: error.message });
+    }
+};
+
 // Update Product by ID
 // const updateProducts = async (req, res) => {
 //     try {
@@ -75,6 +88,6 @@ const deleteCarts = async (req, res) => {
 // };
 
 module.exports = {
-    getCartByUserId , createCart, deleteCarts
+    getCartByUserId , createCart, deleteCarts, deleteCartByUserId
 };
 
